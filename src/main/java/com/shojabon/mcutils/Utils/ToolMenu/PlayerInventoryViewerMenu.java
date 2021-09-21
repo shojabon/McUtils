@@ -1,15 +1,20 @@
+
 package com.shojabon.mcutils.Utils.ToolMenu;
 
-import com.shojabon.man10shopv2.Utils.SInventory.SInventory;
-import com.shojabon.man10shopv2.Utils.SInventory.SInventoryItem;
-import com.shojabon.man10shopv2.Utils.SItemStack;
+import com.shojabon.mcutils.Utils.SInventory.SInventory;
+import com.shojabon.mcutils.Utils.SInventory.SInventoryItem;
+import com.shojabon.mcutils.Utils.SItemStack;
+import it.unimi.dsi.fastutil.Hash;
 import org.bukkit.Material;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
+import java.util.function.Consumer;
 
-public class PlayerInventoryViewerMenu extends SInventory{
+public class PlayerInventoryViewerMenu extends SInventory {
 
 
     HashMap<Integer, ItemStack> inventoryContents = new HashMap<>();
