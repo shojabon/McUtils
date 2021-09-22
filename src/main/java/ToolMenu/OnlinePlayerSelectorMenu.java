@@ -1,8 +1,8 @@
-package com.shojabon.mcutils.Utils.ToolMenu;
+package ToolMenu;
 
-import com.shojabon.man10shopv2.Utils.SInventory.SInventoryItem;
-import com.shojabon.man10shopv2.Utils.SItemStack;
-import com.shojabon.man10shopv2.Utils.SStringBuilder;
+import com.shojabon.mcutils.Utils.SInventory.SInventoryItem;
+import com.shojabon.mcutils.Utils.SItemStack;
+import com.shojabon.mcutils.Utils.SStringBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-public class OnlinePlayerSelectorMenu extends LargeSInventoryMenu{
+public class OnlinePlayerSelectorMenu extends LargeSInventoryMenu {
 
     Player player;
     Consumer<Player> onClick = null;

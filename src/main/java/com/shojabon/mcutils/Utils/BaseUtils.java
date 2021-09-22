@@ -1,6 +1,5 @@
 package com.shojabon.mcutils.Utils;
 
-import com.shojabon.man10shopv2.Enums.Man10ShopType;
 import org.bukkit.Material;
 
 public class BaseUtils {
@@ -55,10 +54,6 @@ public class BaseUtils {
         return "無効";
     }
 
-    public static String buySellToString(Man10ShopType type){
-        if(type == Man10ShopType.BUY) return "販売ショップ";
-        return "買取ショップ";
-    }
 
     public static String weekToString(int week){
         return new String[]{"日曜日", "月曜日", "火曜日", "水曜日","木曜日", "金曜日", "土曜日"}[week];
