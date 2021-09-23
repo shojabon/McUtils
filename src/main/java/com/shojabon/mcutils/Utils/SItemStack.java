@@ -2,6 +2,7 @@ package com.shojabon.mcutils.Utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -9,10 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.persistence.PersistentDataHolder;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
+import javax.print.attribute.standard.PresentationDirection;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
@@ -247,6 +252,23 @@ public class SItemStack {
         skullMeta.setOwningPlayer(player);
         this.item.setItemMeta(skullMeta);
         return this;
+    }
+
+    //data saver
+
+    public SItemStack setCustomData(JavaPlugin plugin, String key, String value){
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, key), PersistentDataType.STRING, value);
+        this.item.setItemMeta(itemMeta);
+        return this;
+    }
+
+    public String getCustomData(JavaPlugin plugin, String key){
+        ItemMeta itemMeta = item.getItemMeta();
+        if(!itemMeta.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.STRING)){
+            return null;
+        }
+        return itemMeta.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.STRING);
     }
 
 }
