@@ -5,6 +5,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SConfigFile {
 
@@ -131,6 +134,16 @@ public class SConfigFile {
 
     }
 
+    public static ArrayList<File> getAllFileNameInPath(String path){
+        File target = new File(path);
+        if(!target.exists()) return new ArrayList<>();
+        if(!target.isDirectory())return new ArrayList<>();
+        File[] files = target.listFiles();
+        if(files == null) return new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(files));
+
+
+    }
 
 
 }

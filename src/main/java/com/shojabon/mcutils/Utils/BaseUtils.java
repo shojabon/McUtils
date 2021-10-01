@@ -13,34 +13,35 @@ public class BaseUtils {
         }
     }
 
-    public static boolean isBoolean(String testing){
-        return "true".equalsIgnoreCase(testing) || "false".equalsIgnoreCase(testing);
+    public static boolean isFloat(String testing){
+        try{
+            Float.valueOf(testing);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
     }
 
-    static Material[] signs = new Material[]{
-            Material.OAK_SIGN,
-            Material.OAK_WALL_SIGN,
-            Material.SPRUCE_SIGN,
-            Material.SPRUCE_WALL_SIGN,
-            Material.ACACIA_SIGN,
-            Material.ACACIA_WALL_SIGN,
-            Material.BIRCH_SIGN,
-            Material.BIRCH_WALL_SIGN,
-            Material.CRIMSON_SIGN,
-            Material.CRIMSON_WALL_SIGN,
-            Material.DARK_OAK_SIGN,
-            Material.DARK_OAK_WALL_SIGN,
-            Material.JUNGLE_SIGN,
-            Material.JUNGLE_WALL_SIGN,
-            Material.WARPED_SIGN,
-            Material.WARPED_WALL_SIGN
-    };
-
-    public static boolean isSign(Material type){
-        for(Material sign: signs){
-            if(type == sign) return true;
+    public static boolean isDouble(String testing){
+        try{
+            Double.valueOf(testing);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
         }
-        return false;
+    }
+
+    public static boolean isLong(String testing){
+        try{
+            Long.valueOf(testing);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    public static boolean isBoolean(String testing){
+        return "true".equalsIgnoreCase(testing) || "false".equalsIgnoreCase(testing);
     }
 
     public static String priceString(int price){

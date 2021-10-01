@@ -271,4 +271,12 @@ public class SItemStack {
         return itemMeta.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.STRING);
     }
 
+    public SItemStack removeCustomData(JavaPlugin plugin, String key){
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.getPersistentDataContainer().remove(new NamespacedKey(plugin, key));
+        this.item.setItemMeta(itemMeta);
+        return this;
+    }
+
+
 }
