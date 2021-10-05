@@ -278,5 +278,22 @@ public class SItemStack {
         return this;
     }
 
+    //custom model data
+
+    public boolean hasCustomModelData(){
+        ItemMeta itemMeta = item.getItemMeta();
+        return itemMeta.hasCustomModelData();
+    }
+
+    public int getCustomModelData(){
+        ItemMeta itemMeta = item.getItemMeta();
+        if(!itemMeta.hasCustomModelData()) return -1;
+        return itemMeta.getCustomModelData();
+    }
+
+    public void setCustomModelData(int data){
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(data);
+    }
 
 }
