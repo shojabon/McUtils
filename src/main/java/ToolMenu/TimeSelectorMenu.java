@@ -52,7 +52,7 @@ public class TimeSelectorMenu extends SInventory {
         }
 
         //month
-        String monthString = padString(String.valueOf(calendar.get(Calendar.MONTH)), 2);
+        String monthString = padString(String.valueOf(calendar.get(Calendar.MONTH)+1), 2);
         for(int i =0; i < monthString.length(); i++){
             setItem(monthDisplay[i], new SInventoryItem(new SItemStack(banner.getItem(Integer.parseInt(String.valueOf(monthString.charAt(i))))).setDisplayName(" ").build()).clickable(false));
         }
@@ -151,7 +151,14 @@ public class TimeSelectorMenu extends SInventory {
             calendar.set(Calendar.MILLISECOND, 0);
             onConfirm.accept(calendar.getTimeInMillis()/1000L);
         });
-        setItem(new int[]{49}, confirm);
+        setItem(new int[]{48}, confirm);
+
+        SInventoryItem cancel = new SInventoryItem(new SItemStack(Material.RED_STAINED_GLASS_PANE).setDisplayName(new SStringBuilder().red().bold().text("設定を解除").build()).build());
+        cancel.clickable(false);
+        cancel.setAsyncEvent(e-> {
+            onConfirm.accept(-1L);
+        });
+        setItem(new int[]{50}, cancel);
 
 
     }
