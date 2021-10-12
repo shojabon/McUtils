@@ -48,31 +48,31 @@ public class TimeSelectorMenu extends SInventory {
         int year = calendar.get(Calendar.YEAR);
         String yearString = padString(String.valueOf(year), 4);
         for(int i =0; i < yearString.length(); i++){
-            setItem(yearDisplay[i], new SInventoryItem(banner.getItem(Integer.parseInt(String.valueOf(yearString.charAt(i))))).clickable(false));
+            setItem(yearDisplay[i], new SInventoryItem(new SItemStack(banner.getItem(Integer.parseInt(String.valueOf(yearString.charAt(i))))).setDisplayName(" ").build()).clickable(false));
         }
 
         //month
         String monthString = padString(String.valueOf(calendar.get(Calendar.MONTH)), 2);
         for(int i =0; i < monthString.length(); i++){
-            setItem(monthDisplay[i], new SInventoryItem(banner.getItem(Integer.parseInt(String.valueOf(monthString.charAt(i))))).clickable(false));
+            setItem(monthDisplay[i], new SInventoryItem(new SItemStack(banner.getItem(Integer.parseInt(String.valueOf(monthString.charAt(i))))).setDisplayName(" ").build()).clickable(false));
         }
 
         //date
         String dateString = padString(String.valueOf(calendar.get(Calendar.DATE)), 2);
         for(int i =0; i < dateString.length(); i++){
-            setItem(dateDisplay[i], new SInventoryItem(banner.getItem(Integer.parseInt(String.valueOf(dateString.charAt(i))))).clickable(false));
+            setItem(dateDisplay[i], new SInventoryItem(new SItemStack(banner.getItem(Integer.parseInt(String.valueOf(dateString.charAt(i))))).setDisplayName(" ").build()).clickable(false));
         }
 
         //hour
         String hourString = padString(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)), 2);
         for(int i =0; i < hourString.length(); i++){
-            setItem(hourDisplay[i], new SInventoryItem(banner.getItem(Integer.parseInt(String.valueOf(hourString.charAt(i))))).clickable(false));
+            setItem(hourDisplay[i], new SInventoryItem(new SItemStack(banner.getItem(Integer.parseInt(String.valueOf(hourString.charAt(i))))).setDisplayName(" ").build()).clickable(false));
         }
 
         //minute
         String minuteString = padString(String.valueOf(calendar.get(Calendar.MINUTE)), 2);
         for(int i =0; i < minuteString.length(); i++){
-            setItem(minuteDisplay[i], new SInventoryItem(banner.getItem(Integer.parseInt(String.valueOf(minuteString.charAt(i))))).clickable(false));
+            setItem(minuteDisplay[i], new SInventoryItem(new SItemStack(banner.getItem(Integer.parseInt(String.valueOf(minuteString.charAt(i))))).setDisplayName(" ").build()).clickable(false));
         }
         renderInventory();
         
@@ -114,15 +114,15 @@ public class TimeSelectorMenu extends SInventory {
     public SInventoryItem getButtonItem(boolean adding, int value, int type){
         SInventoryItem item;
         if(adding){
-            item = new SInventoryItem(banner.getSymbol("plus"));
+            item = new SInventoryItem(new SItemStack(banner.getSymbol("plus")).setDisplayName("§a§l+").build());
         }else{
-            item = new SInventoryItem(banner.getSymbol("minus"));
+            item = new SInventoryItem(new SItemStack(banner.getSymbol("minus")).setDisplayName("§c§l-").build());
         }
         item.clickable(false);
         item.setEvent(e -> {
             if(adding){
                 calendar.add(type, value);
-                if(calendar.getTimeInMillis() > 253402268399L*1000){
+                if(calendar.getTimeInMillis() > 253402268399L*1000){ //9999/12/31
                     calendar.setTimeInMillis(253402268399L*1000L);
                 }
             }else{
@@ -147,6 +147,8 @@ public class TimeSelectorMenu extends SInventory {
         SInventoryItem confirm = new SInventoryItem(new SItemStack(Material.LIME_STAINED_GLASS_PANE).setDisplayName(new SStringBuilder().green().bold().text("確認").build()).build());
         confirm.clickable(false);
         confirm.setAsyncEvent(e-> {
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
             onConfirm.accept(calendar.getTimeInMillis()/1000L);
         });
         setItem(new int[]{49}, confirm);
