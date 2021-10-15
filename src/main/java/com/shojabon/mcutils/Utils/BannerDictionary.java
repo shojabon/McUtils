@@ -27,6 +27,9 @@ public class BannerDictionary {
         symbol.put("plus",  new SBannerItemStack(Material.WHITE_BANNER).pattern(new Pattern(DyeColor.BLACK, PatternType.STRAIGHT_CROSS)).pattern(new Pattern(DyeColor.WHITE, PatternType.BORDER)).pattern(new Pattern(DyeColor.WHITE, PatternType.STRIPE_TOP)).pattern(new Pattern(DyeColor.WHITE, PatternType.STRIPE_BOTTOM)).build());
         symbol.put("minus",  new SBannerItemStack(Material.WHITE_BANNER).pattern(new Pattern(DyeColor.BLACK, PatternType.STRIPE_MIDDLE)).pattern(new Pattern(DyeColor.WHITE, PatternType.BORDER)).build());
         symbol.put("dot", new SBannerItemStack(Material.WHITE_BANNER).pattern(new Pattern(DyeColor.BLACK, PatternType.CIRCLE_MIDDLE)).build());
+        symbol.put("left", new SBannerItemStack(Material.WHITE_BANNER).pattern(new Pattern(DyeColor.BLACK, PatternType.STRIPE_LEFT)).pattern(new Pattern(DyeColor.BLACK, PatternType.STRIPE_MIDDLE)).pattern(new Pattern(DyeColor.WHITE, PatternType.STRIPE_TOP)).pattern(new Pattern(DyeColor.WHITE, PatternType.STRIPE_BOTTOM)).pattern(new Pattern(DyeColor.WHITE, PatternType.CURLY_BORDER)).build());
+        symbol.put("right", new SBannerItemStack(Material.WHITE_BANNER).pattern(new Pattern(DyeColor.BLACK, PatternType.STRIPE_RIGHT)).pattern(new Pattern(DyeColor.BLACK, PatternType.STRIPE_MIDDLE)).pattern(new Pattern(DyeColor.WHITE, PatternType.STRIPE_TOP)).pattern(new Pattern(DyeColor.WHITE, PatternType.STRIPE_BOTTOM)).pattern(new Pattern(DyeColor.WHITE, PatternType.CURLY_BORDER)).build());
+
 
     }
 
