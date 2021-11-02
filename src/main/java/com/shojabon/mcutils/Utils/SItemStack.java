@@ -220,18 +220,22 @@ public class SItemStack {
         return this;
     }
 
+    public int getMaxStackSize(){
+        return this.item.getMaxStackSize();
+    }
+
     public boolean hasDamage(){
         ItemMeta itemMeta = this.item.getItemMeta();
         return ((Damageable) itemMeta).hasDamage();
     }
 
-    public int getMaxStackSize(){
-        return this.item.getMaxStackSize();
-    }
-
     public int getDamage(){
         ItemMeta itemMeta = this.item.getItemMeta();
         return ((Damageable) itemMeta).getDamage();
+    }
+
+    public int getMaxDamage(){
+        return this.item.getType().getMaxDurability();
     }
 
     public SItemStack setDamage(int damage){
