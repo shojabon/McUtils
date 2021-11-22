@@ -114,7 +114,7 @@ public class SCommandObject {
             if(arg.allowedStrings.size() == 1){
                 builder.append(prefix + arg.allowedStrings.get(0));
             }else{
-                builder.append(prefix + "<" + arg.alias.get(0) + ">");
+                if(arg.alias.size() != 0) builder.append(prefix + "<" + arg.alias.get(0) + ">");
             }
             //explanation
             StringBuilder explanation = new StringBuilder();

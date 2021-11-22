@@ -21,7 +21,7 @@ public class SCommandArgument {
 
     public SCommandArgument addAllowedString(String string){
         allowedStrings.add(string);
-        alias.add(string);
+        this.alias.add(string);
         return this;
     }
 
@@ -33,8 +33,8 @@ public class SCommandArgument {
     public SCommandArgument addAllowedType(SCommandArgumentType type){
         allowedTypes.add(type);
         if(type == SCommandArgumentType.BOOLEAN){
-            alias.add("true");
-            alias.add("false");
+            this.alias.add("true");
+            this.alias.add("false");
         }
         return this;
     }

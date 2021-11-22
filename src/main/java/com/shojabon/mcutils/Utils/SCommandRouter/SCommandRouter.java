@@ -25,7 +25,7 @@ public abstract class SCommandRouter implements @Nullable CommandExecutor, @Null
 
     public SCommandRouter(){
         addCommand(new SCommandObject().addArgument(new SCommandArgument().addAllowedString("help"))
-                .setExecutor(e -> help(e)));
+                .setExecutor(this::help));
     }
 
     public void addCommand(SCommandObject args){

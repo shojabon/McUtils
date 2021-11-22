@@ -33,6 +33,10 @@ public class CategoricalSInventoryMenu extends SInventory{
         items.get(category).add(item);
     }
 
+    public void addInitializedCategory(String category){
+        items.put(category, new ArrayList<>());
+    }
+
     public void renderControlBar(){
         int[] slots = new int[9];
         for(int i = 0; i < 9; i++){
