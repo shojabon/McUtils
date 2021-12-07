@@ -4,6 +4,7 @@ import org.bukkit.Material;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 public class BaseUtils {
 
@@ -46,6 +47,28 @@ public class BaseUtils {
     public static boolean isBoolean(String testing){
         return "true".equalsIgnoreCase(testing) || "false".equalsIgnoreCase(testing);
     }
+
+    public static boolean isMaterial(String testing){
+        try{
+            Material.valueOf(testing);
+            return true;
+        }catch (IllegalArgumentException  e){
+            return false;
+        }
+    }
+
+    public static boolean isUUID(String testing){
+        try{
+            UUID.fromString(testing);
+            return true;
+        }catch (IllegalArgumentException  e){
+            return false;
+        }
+    }
+
+
+
+
 
     public static String priceString(int price){
         return String.format("%,d", price);

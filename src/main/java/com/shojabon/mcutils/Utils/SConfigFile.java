@@ -5,8 +5,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 public class SConfigFile {
@@ -143,6 +145,24 @@ public class SConfigFile {
         return new ArrayList<>(Arrays.asList(files));
 
 
+    }
+
+    public static String base64EncodeConfig(YamlConfiguration config){
+        return Base64.getEncoder().encodeToString(config.saveToString().getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static YamlConfiguration loadConfigFromBase64(String base64){
+        byte[] decodedBytes = Base64.getDecoder().decode(base64);
+        String decodedString = new String(decodedBytes);
+        YamlConfiguration config = new YamlConfiguration();
+        try {
+            config.loadFromString(decodedString);
+            return config;
+        } catch (InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 
