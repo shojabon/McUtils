@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -139,23 +140,31 @@ public abstract class SInventory implements Listener {
     }
 
     public void open(Player p){
-        registerEvents();
-        renderMenu();
-        afterRenderMenu();
-        renderInventory();
-        playersInInventoryGlobal.add(p.getUniqueId());
-        p.openInventory(activeInventory);
+        open(p, false);
+    }
 
-        for(Consumer<Player> event: afterInventoryOpenEvents){
-            event.accept(p);
-        }
-        for(Consumer<Player> event: asyncAfterInventoryOpenEvents){
-            threadPool.execute(() -> event.accept(p));
-        }
-        if(plugin != null){
-            plugin.getServer().getPluginManager().registerEvents(this, plugin);
-            playerInMenu.add(p.getUniqueId());
-        }
+    public void open(Player p, boolean activateEvent){
+        plugin.getServer().getScheduler().runTask(plugin, ()->{
+            if(!activateEvent)movingPlayer.add(p.getUniqueId());
+            registerEvents();
+            renderMenu();
+            afterRenderMenu();
+            renderInventory();
+            playersInInventoryGlobal.add(p.getUniqueId());
+            p.openInventory(activeInventory);
+
+            for(Consumer<Player> event: afterInventoryOpenEvents){
+                event.accept(p);
+            }
+            for(Consumer<Player> event: asyncAfterInventoryOpenEvents){
+                threadPool.execute(() -> event.accept(p));
+            }
+            if(plugin != null){
+                plugin.getServer().getPluginManager().registerEvents(this, plugin);
+                playerInMenu.add(p.getUniqueId());
+            }
+            if(!activateEvent)movingPlayer.remove(p.getUniqueId());
+        });
     }
 
     public void close(Player p){
@@ -168,6 +177,15 @@ public abstract class SInventory implements Listener {
             movingPlayer.remove(p.getUniqueId());
         });
     }
+
+    public static void closeNoEvent(Player p, Plugin plugin){
+        plugin.getServer().getScheduler().runTask(plugin, ()->{
+            movingPlayer.add(p.getUniqueId());
+            p.closeInventory();
+            movingPlayer.remove(p.getUniqueId());
+        });
+    }
+
 
     public void moveToMenu(Player p, SInventory inv){
         plugin.getServer().getScheduler().runTask(plugin, ()->{

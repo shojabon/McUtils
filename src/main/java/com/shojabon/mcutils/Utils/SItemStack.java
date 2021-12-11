@@ -70,6 +70,8 @@ public class SItemStack {
             dataOutput.writeInt(1);
             dataOutput.writeObject(item);
             dataOutput.close();
+
+
             return Base64Coder.encodeLines(outputStream.toByteArray());
         } catch (Exception e) {
             return null;
