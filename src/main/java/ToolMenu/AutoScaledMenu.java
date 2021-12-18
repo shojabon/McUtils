@@ -12,7 +12,7 @@ public class AutoScaledMenu extends SInventory {
 
     ArrayList<SInventoryItem> items = new ArrayList<>();
 
-    int[][] itemPlacement = {
+    public int[][] itemPlacement = {
             {22},
             {21, 23},
             {13, 30, 32},
@@ -21,6 +21,15 @@ public class AutoScaledMenu extends SInventory {
             {11, 13, 15, 29, 31, 33},
             {11, 13, 15, 29, 31, 33, 22},
             {11, 13, 15, 29, 31, 33, 21, 23},
+            {12, 13, 14, 20,22,24,30,31,32},
+            {11,13,15,19,21,23,25,29,31,33},
+            {10,12,14,16,20,22,24,28,30,32,34},
+            {10,12,14,16,19,21,23,25,28,30,32,34},
+            {10,12,14,16,19,21,23,25,28,30,32,34,22},
+            {10,12,14,16,19,21,23,25,28,30,32,34,20,24},
+            {10,12,14,16,19,21,23,25,28,30,32,34,20,22,24},
+            {10,12,14,16,19,21,23,25,28,30,32,34,20,24,13,31},
+
     };
 
     public AutoScaledMenu(String title, JavaPlugin plugin) {
@@ -39,8 +48,14 @@ public class AutoScaledMenu extends SInventory {
 
     @Override
     public void renderMenu() {
-        for(int i = 0; i < items.size(); i++){
-            setItem(itemPlacement[items.size()-1][i], items.get(i));
+        if(items.size() <= itemPlacement.length){
+            for(int i = 0; i < items.size(); i++){
+                setItem(itemPlacement[items.size()-1][i], items.get(i));
+            }
+        }else{
+            for(int i = 0; i < items.size(); i++){
+                setItem(i, items.get(i));
+            }
         }
     }
 }

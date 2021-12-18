@@ -187,13 +187,13 @@ public abstract class SInventory implements Listener {
     }
 
 
-    public void moveToMenu(Player p, SInventory inv){
-        plugin.getServer().getScheduler().runTask(plugin, ()->{
-            movingPlayer.add(p.getUniqueId());
-            inv.open(p);
-            movingPlayer.remove(p.getUniqueId());
-        });
-    }
+//    public void moveToMenu(Player p, SInventory inv){
+//        plugin.getServer().getScheduler().runTask(plugin, ()->{
+//            movingPlayer.add(p.getUniqueId());
+//            inv.open(p);
+//            movingPlayer.remove(p.getUniqueId());
+//        });
+//    }
 
     //abstract ish functions
 
