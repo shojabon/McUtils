@@ -109,6 +109,5 @@ public abstract class SCommandRouter implements @Nullable CommandExecutor, @Null
         }
         data.sender.sendMessage("§e===================================");
         data.sender.sendMessage("§lコマンドクリックで情報表示");
-        data.sender.sendMessage("§cCreated By Sho0");
     }
 }
