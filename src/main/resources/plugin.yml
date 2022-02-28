@@ -1,5 +1,0 @@
-name: McUtils
-version: '${project.version}'
-main: com.shojabon.mcutils.McUtils
-api-version: 1.17
-authors: [ Sho0 ]

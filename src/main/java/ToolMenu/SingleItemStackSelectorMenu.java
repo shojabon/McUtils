@@ -4,19 +4,19 @@ import com.shojabon.mcutils.Utils.SInventory.SInventory;
 import com.shojabon.mcutils.Utils.SInventory.SInventoryItem;
 import com.shojabon.mcutils.Utils.SItemStack;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class SingleItemStackSelectorMenu extends SInventory {
 
     ItemStack currentItem;
 
     Consumer<ItemStack> onConfirm = null;
+    Function<ItemStack, Boolean> checkItemFunction = null;
 
     boolean selectTypeItem = false;
     boolean materialSelector = false;
@@ -46,6 +46,10 @@ public class SingleItemStackSelectorMenu extends SInventory {
         this.onConfirm = consumer;
     }
 
+    public void setCheckItemFunction(Function<ItemStack, Boolean> function){
+        this.checkItemFunction = function;
+    }
+
 
     public SingleItemStackSelectorMenu(String title, ItemStack defaultItem, JavaPlugin plugin) {
         super(title, 4, plugin);
@@ -62,6 +66,10 @@ public class SingleItemStackSelectorMenu extends SInventory {
             if(e.getClickedInventory().getType() != InventoryType.PLAYER) return;
             if(e.getCurrentItem() == null)return;
             e.setCancelled(true);
+
+            if(this.checkItemFunction != null){
+                if(!this.checkItemFunction.apply(e.getCurrentItem()))return;
+            }
 
             //type item selector
             if(selectTypeItem){
