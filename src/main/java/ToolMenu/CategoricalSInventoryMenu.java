@@ -8,9 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class CategoricalSInventoryMenu extends SInventory{
 
@@ -18,6 +17,7 @@ public class CategoricalSInventoryMenu extends SInventory{
     String currentCategory;
     int currentPage = 0;
     int categoryIndex = 0;
+    boolean sort = false;
 
     public CategoricalSInventoryMenu(String title, String currentCategory, JavaPlugin plugin) {
         super(title, 6, plugin);
@@ -31,6 +31,10 @@ public class CategoricalSInventoryMenu extends SInventory{
     public void addItem(String category, SInventoryItem item){
         if(!items.containsKey(category)) items.put(category, new ArrayList<>());
         items.get(category).add(item);
+    }
+
+    public void sort(boolean sort){
+        this.sort = sort;
     }
 
     public void addInitializedCategory(String category){
@@ -103,11 +107,15 @@ public class CategoricalSInventoryMenu extends SInventory{
         renderControlBar();
         if(!items.containsKey(category))return;
         ArrayList<SInventoryItem> itemsInCategory = items.get(category);
+        Object[] itemArray = itemsInCategory.toArray();
+        if(sort){
+            Arrays.sort(itemArray, Comparator.comparing(obj -> new SItemStack(((SInventoryItem) obj).getItemStack()).getDisplayName()));
+        }
         int startingIndex = page*5*9;
-        int ending = itemsInCategory.size() - startingIndex;
+        int ending = itemArray.length - startingIndex;
         if(ending> 5*9) ending = 5*9;
         for(int i = 0; i < ending; i++){
-            setItem(i, itemsInCategory.get(startingIndex+i));
+            setItem(i, (SInventoryItem) itemArray[startingIndex+i]);
         }
         renderInventory();
     }
