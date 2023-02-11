@@ -2,6 +2,8 @@ package com.shojabon.mcutils.Utils;
 
 import org.bukkit.Material;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -68,7 +70,13 @@ public class BaseUtils {
 
 
 
+    public static double roundValue(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
 
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 
     public static String priceString(int price){
         return String.format("%,d", price);

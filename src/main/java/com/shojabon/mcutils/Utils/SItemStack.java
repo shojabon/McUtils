@@ -1,14 +1,12 @@
 package com.shojabon.mcutils.Utils;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
@@ -297,9 +295,19 @@ public class SItemStack {
         return itemMeta.getCustomModelData();
     }
 
-    public void setCustomModelData(int data){
+    public SItemStack setCustomModelData(int data){
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(data);
+        this.item.setItemMeta(itemMeta);
+        return this;
+    }
+
+    public SItemStack setLeatherColor(Color color){
+        ItemMeta itemMeta = item.getItemMeta();
+        LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemMeta;
+        leatherArmorMeta.setColor(color);
+        item.setItemMeta(leatherArmorMeta);
+        return this;
     }
 
 }
