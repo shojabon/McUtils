@@ -9,7 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SConfigFile {
 
@@ -93,6 +94,13 @@ public class SConfigFile {
         }
 
         return config;
+    }
+    public static String getResourceAsText(JavaPlugin plugin, String resourcePath){
+
+        InputStream resourceStream = plugin.getResource(resourcePath);
+        if(resourceStream == null) return null;
+        Stream<String> streamOfString= new BufferedReader(new InputStreamReader(resourceStream)).lines();
+        return streamOfString.collect(Collectors.joining());
     }
 
     public YamlConfiguration getResourceAsConfig(String resourcePath){
