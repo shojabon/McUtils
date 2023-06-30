@@ -92,9 +92,18 @@ public class SCommandScript {
     }
 
     private void executeCommand(String command){
-        for(String placeholderKey : placeholderData.keySet()){
-            command = command.replaceAll("\\{" + placeholderKey + "}", placeholderData.get(placeholderKey));
+        while (true){
+            boolean touchedData = false;
+            for(String placeholderKey : placeholderData.keySet()){
+                String newCommand = command.replaceAll("\\{" + placeholderKey + "}", placeholderData.get(placeholderKey));
+                if(!newCommand.equals(command)){
+                    command = newCommand;
+                    touchedData = true;
+                }
+            }
+            if(!touchedData) break;
         }
+
         String finalCommand = command;
         Bukkit.getServer().getScheduler().runTask(
                 plugin,
