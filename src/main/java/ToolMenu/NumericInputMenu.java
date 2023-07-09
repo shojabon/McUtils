@@ -81,7 +81,9 @@ public class NumericInputMenu extends SInventory{
             int nextCharacter = Integer.parseInt(String.valueOf(String.valueOf(currentValue).charAt(i)));
             SItemStack itemStack = new SItemStack(dictionary.getItem(nextCharacter));
             itemStack.setDisplayName(new SStringBuilder().aqua().bold().text(currentValue).build());
-            setItem(numberDisplay[lengthOfCurrentValue-1-i], itemStack.build());
+            SInventoryItem item = new SInventoryItem(itemStack.build());
+            item.clickable(false);
+            setItem(numberDisplay[lengthOfCurrentValue-1-i], item);
         }
         renderConfirmButton();
         renderInventory();
